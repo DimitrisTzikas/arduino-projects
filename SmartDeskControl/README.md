@@ -1,6 +1,5 @@
 # SmartDeskControl
 SmartDeskControl is a program for the arduino to control your devices.
-<hr>
 
 ## Requirements
 
