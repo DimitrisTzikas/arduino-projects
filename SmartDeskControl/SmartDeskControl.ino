@@ -30,7 +30,7 @@ BufferFiller bfill;
 #define button3 8
 #define button4 9
 
-// #define lightSensor A0
+#define lightSensor A0
 
 // Relais (Disabled), Buttons, LightSensor Status
 bool relayStatus1 = true;
@@ -43,7 +43,12 @@ int buttonStatus2 = 0;
 int buttonStatus3 = 0;
 int buttonStatus4 = 0;
 
-// int lightSensorStatus = 0;
+bool buttonCalmDown1 = false;
+bool buttonCalmDown2 = false;
+bool buttonCalmDown3 = false;
+bool buttonCalmDown4 = false;
+
+int lightSensorStatus = 0;
 
 // For HTTP Connection
 word tcp;
@@ -171,38 +176,45 @@ void interfacePageActions() {
 }
 
 void buttonActions() {
-
-  if (buttonStatus1){
-    delay(1000);
-    if (relayStatus1)
-      relayStatus1 = false;
-    else
-      relayStatus1 = true;
-  }
-
-  if (buttonStatus2){
-    delay(1000);
+  if (buttonStatus1 && !buttonCalmDown1){
+    buttonCalmDown1 = true;
     if (relayStatus2)
       relayStatus2 = false;
     else
       relayStatus2 = true;
   }
+  else if (!buttonStatus1)
+    buttonCalmDown1 = false;
 
-  if (buttonStatus3){
-    delay(1000);
+  if (buttonStatus2 && !buttonCalmDown2){
+    buttonCalmDown2 = true;
     if (relayStatus3)
       relayStatus3 = false;
     else
       relayStatus3 = true;
   }
+  else if (!buttonStatus2)
+    buttonCalmDown2 = false;
 
-  if (buttonStatus4){
-    delay(1000);
+  if (buttonStatus3 && !buttonCalmDown3){
+    buttonCalmDown3 = true;
     if (relayStatus4)
       relayStatus4 = false;
     else
       relayStatus4 = true;
   }
+  else if (!buttonStatus3)
+    buttonCalmDown3 = false;
+
+  if (buttonStatus4 && !buttonCalmDown4){
+    buttonCalmDown4 = true;
+    if (relayStatus1)
+      relayStatus1 = false;
+    else
+      relayStatus1 = true;
+  }
+  else if (!buttonStatus4)
+    buttonCalmDown4 = false;
 
 }
 
@@ -236,14 +248,14 @@ void loop() {
   digitalWrite(relay2, relayStatus2);
   digitalWrite(relay3, relayStatus3);
   digitalWrite(relay4, relayStatus4);
-
+  
   // Take Buttons & LightSensor Inputs
   buttonStatus1 = digitalRead(button1);
   buttonStatus2 = digitalRead(button2);
   buttonStatus3 = digitalRead(button3);
   buttonStatus4 = digitalRead(button4);
 
-  // lightSensorStatus = analogRead(lightSensor);
+  lightSensorStatus = analogRead(lightSensor);
 
   // If Bright Light Turn OFF Relay
   // relayStatus4 = (relayStatus4 || lightSensorStatus > 10);
