@@ -10,5 +10,6 @@ SmartDeskControl is a program for the arduino to control your devices.
 * 4xButtons
 
 #### Software
-* EtherCard
-  EtherCard is a driver for the Microchip ENC28J60 chip, compatible with Arduino IDE. It is adapted and extended from code written by Guido Socher and Pascal Stang. You can find it [here](https://github.com/njh/ethercard).
+*EtherCard
+
+EtherCard is a driver for the Microchip ENC28J60 chip, compatible with Arduino IDE. It is adapted and extended from code written by Guido Socher and Pascal Stang. You can find it [here](https://github.com/njh/ethercard).
